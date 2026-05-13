@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>文殊坊铺位图块模型</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="data/maps.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="图层控制">
+        <div class="brand">
+          <div>
+            <p class="eyebrow">Wenshufang</p>
+            <h1>铺位图块模型</h1>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>分析项</span>
+          <select id="analysisSelect"></select>
+        </label>
+
+        <label class="field">
+          <span>楼层</span>
+          <select id="floorSelect"></select>
+        </label>
+
+        <label class="field">
+          <span>搜索图块</span>
+          <input id="searchInput" type="search" placeholder="输入分类或图块编号" />
+        </label>
+
+        <div class="summary-grid">
+          <div class="metric">
+            <span id="mapCount">0</span>
+            <small>图层</small>
+          </div>
+          <div class="metric">
+            <span id="regionCount">0</span>
+            <small>图块</small>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="panel-title">图例</div>
+          <div id="legendList" class="legend-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">模型文件</div>
+          <a class="model-link" href="data/tile_model.json" download>打开 tile_model.json</a>
+          <p class="note">数据来自 PNG 色块自动提取；点击图块后可看局部放大图和当前图层分类。</p>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p id="currentSubtitle" class="eyebrow">图层</p>
+            <h2 id="currentTitle">载入中</h2>
+          </div>
+          <div class="toolbar" aria-label="地图工具">
+            <button id="zoomOut" type="button" title="缩小">-</button>
+            <button id="zoomIn" type="button" title="放大">+</button>
+            <button id="fitMap" type="button">适配</button>
+          </div>
+        </header>
+
+        <section id="mapViewport" class="map-viewport" aria-label="铺位图">
+          <div id="mapContent" class="map-content">
+            <img id="mapImage" alt="铺位分析图" draggable="false" />
+            <div id="hitLayer" class="hit-layer"></div>
+          </div>
+          <div id="mapHint" class="map-hint">滚轮缩放，拖拽移动，点击色块查看信息</div>
+        </section>
+      </main>
+
+      <aside class="details" aria-label="图块信息">
+        <div class="details-head">
+          <p class="eyebrow">Selection</p>
+          <h2 id="selectedTitle">未选择图块</h2>
+        </div>
+
+        <canvas id="cropCanvas" width="360" height="260" aria-label="图块局部放大"></canvas>
+        <div id="detailRows" class="detail-rows">
+          <p class="empty-copy">点击任意彩色图块后，这里会显示分类、位置和局部放大截图。</p>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
